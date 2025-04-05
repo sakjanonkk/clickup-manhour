@@ -9,8 +9,10 @@ export async function exportToCsV(
   startDate: Date,
   endDate: Date
 ) {
+  // console.log("Exporting to CSV...");
   const teamResponse = await req("https://api.clickup.com/api/v2/team");
   const teamId = teamResponse.teams[0].id;
+  // console.log('tasksResponse', teamResponse);
   const tasksResponse: TaskResponse = await req(
     `https://api.clickup.com/api/v2/team/${teamId}/time_entries`
   );
@@ -35,7 +37,6 @@ export async function exportToCsV(
       }
     });
   });
-
   // Process each group of tasks by space_id
   let totalBaht = 0;
   let spaceName = "";
